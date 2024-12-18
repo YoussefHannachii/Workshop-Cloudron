@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffffcc;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background-color: #6c63ff;
+            border-color: #6c63ff;
+        }
+        .btn-primary:hover {
+            background-color: #5750d8;
+            border-color: #5750d8;
+        }
+        .btn-danger {
+            background-color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        .btn-danger:hover {
+            background-color: #e55e5e;
+            border-color: #e55e5e;
+        }
+        .btn-secondary {
+            background-color: #cccccc;
+            border-color: #cccccc;
+        }
+        .btn-secondary:hover {
+            background-color: #b3b3b3;
+            border-color: #b3b3b3;
+        }
+        h1 {
+            color: #6c63ff;
+            font-weight: bold;
+        }
+        .article-card {
+            background: #fefefe;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .article-card h3 {
+            color: #6c63ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Articles</h1>
+
+        <!-- Articles Section -->
+        {% for article in articles %}
+        <div class="article-card">
+            <h3>{{ article['title'] }}</h3>
+            <p>{{ article['content'][:100] }}...</p>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary" onclick="location.href='{{ url_for('view_article', article_id=article['_id']) }}'">View</button>
+                <button class="btn btn-secondary" onclick="location.href='{{ url_for('edit_article', article_id=article['_id']) }}'">Edit</button>
+                <form method="POST" action="{{ url_for('delete_article', article_id=article['_id']) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Add New Article Button -->
+        <div class="text-center">
+            <button class="btn btn-secondary" onclick="location.href='{{ url_for('new_article') }}'">Add New Article</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
