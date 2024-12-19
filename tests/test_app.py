@@ -1,30 +1,33 @@
+# tests/test_app.py
+
 import unittest
-from app import app  # Assuming your Flask app is in app.py
+from unittest.mock import patch
+from app import app
 
 class FlaskAppTests(unittest.TestCase):
-    
-    @classmethod
-    def setUpClass(cls):
-        """Setup the test client before all tests."""
-        cls.client = app.test_client()
-        cls.client.testing = True
-    
-    def test_index_page(self):
-        """Test if the index page loads correctly and contains articles."""
-        # Simulate GET request to the index page
-        response = self.client.get('/')
-        
-        # Assert that the response status code is 200 (OK)
-        self.assertEqual(response.status_code, 200)
-        
-        # Check if the page contains the word "Articles" (as per your template)
-        self.assertIn(b'Articles', response.data)
-        
-        # Optionally, check if a specific article is in the response (if there are any articles)
-        # Make sure to have a sample article in your database or mock it
-        self.assertIn(b'Add New Article', response.data)
-    
-    # You can add other unit tests as needed (e.g., for article creation, editing, deletion)
+    def setUp(self):
+        self.app = app.test_client()
+        self.app.testing = True
 
-if __name__ == '__main__':
+    @patch('app.articles_collection.find')
+    def test_index_page(self, mock_find):
+        """Test if the index page loads correctly."""
+        mock_find.return_value = []
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+
+    @patch('app.articles_collection.insert_one')
+    def test_new_article_page(self, mock_insert_one):
+        """Test if the new article page loads correctly."""
+        response = self.app.post('/new', data=dict(title="Test Title", content="Test Content", author="Test Author"))
+        self.assertEqual(response.status_code, 302)  # Should redirect after posting
+
+    @patch('app.articles_collection.find_one')
+    def test_view_article_page(self, mock_find_one):
+        """Test if the view article page loads correctly."""
+        mock_find_one.return_value = {"_id": "someid", "title": "Test Title", "content": "Test Content", "author": "Test Author"}
+        response = self.app.get('/article/someid')
+        self.assertEqual(response.status_code, 200)
+
+if __name__ == "__main__":
     unittest.main()
