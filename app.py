@@ -5,9 +5,9 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # Connexion à la base de données MongoDB
-client = MongoClient("mongodb://localhost:27017/")
-db = client['CI-CD']
-articles_collection = db['articles']
+client = MongoClient("mongodb://mongo:27017/") # Use the service name 'mongo' 
+db = client['CI-CD_Project'] 
+articles_collection = db['article']
 
 @app.route('/')
 def index():
@@ -49,4 +49,4 @@ def delete_article(article_id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0', port=5000)

@@ -1,0 +1,44 @@
+stages:
+  - test
+  - build
+  - scan
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+services:
+  - docker:19.03.12
+
+before_script:
+  - docker info
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - pytest tests/
+  only:
+    - main
+
+build:
+  stage: build
+  script:
+    - docker build -t myapp:latest .
+  only:
+    - main
+
+scan:
+  stage: scan
+  script:
+    - docker pull aquasec/trivy
+    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:latest
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  script:
+    - docker-compose up -d --build
+  only:
+    - main
