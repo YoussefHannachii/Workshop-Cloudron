@@ -6,6 +6,9 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
+  DOCKER_REPO: hannachiyou/myapp 
+  DOCKER_TAG: latest 
+  DOCKER_REGISTRY: docker.io
 
 image: docker:27.3.1 
 
@@ -25,20 +28,30 @@ test:
   only:
     - main
 
-build:
-  stage: build
-  script:
-    - docker build -t myapp:latest .
-  only:
-    - main
+build: 
+  stage: build 
+  script: 
+    - docker build -t $DOCKER_REPO:$DOCKER_TAG . 
+  only: 
+    - main 
 
-scan:
-  stage: scan
+push: 
+  stage: push 
   script:
-    - docker pull aquasec/trivy
-    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:latest
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $DOCKER_REGISTRY 
+    - docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REGISTRY/$DOCKER_REPO:$DOCKER_TAG 
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPO:$DOCKER_TAG 
   only:
-    - main
+    - main 
+
+scan: 
+  stage: scan 
+  script: 
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $DOCKER_REGISTRY
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPO:$DOCKER_TAG 
+    - docker pull aquasec/trivy 
+    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --exit-code 1 --severity HIGH,CRITICAL $DOCKER_REGISTRY/$DOCKER_REPO:$DOCKER_TAG 
+  only: - main
 
 deploy:
   stage: deploy
