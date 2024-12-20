@@ -15,6 +15,7 @@ image: docker:27.3.1
 services: 
   - docker:27.3.1-dind
 
+
 test:
   stage: test
   image: python:3.9
