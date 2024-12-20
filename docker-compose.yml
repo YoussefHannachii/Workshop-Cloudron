@@ -10,7 +10,7 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/CI-CD_Project
+      - MONGO_URI=mongodb://mongo:27017/CI-CD_Project/article
     networks:
       - monitoring
     depends_on:
