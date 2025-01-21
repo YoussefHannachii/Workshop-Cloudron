@@ -38,6 +38,7 @@ jobs:
     name: Build Docker Images & Push Them To Docker Hub
     runs-on: ubuntu-latest
     needs: test # Ensures this job runs only if the 'test' job succeeds
+    environment: CI/CD vars
 
     env:
       APP_IMAGE_NAME: myapp
