@@ -1,0 +1,214 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CI-CD Project API",
+        "version": "1.0",
+        "description": "A simple API for managing articles"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get all articles",
+                "description": "Returns all articles",
+                "responses": {
+                    "200": {
+                        "description": "A list of articles",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "title": "Sample Article",
+                                    "content": "This is a sample article.",
+                                    "author": "Author Name"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/new": {
+            "get": {
+                "summary": "Get new article form",
+                "description": "Returns a form for creating a new article",
+                "responses": {
+                    "200": {
+                        "description": "The new article form"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new article",
+                "description": "Creates a new article",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to the index page",
+                        "examples": {
+                            "application/json": {
+                                "message": "Article created successfully.",
+                                "location": "/"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/{article_id}": {
+            "get": {
+                "summary": "View an article by ID",
+                "description": "Returns the article with the given ID",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The article",
+                        "examples": {
+                            "application/json": {
+                                "title": "Sample Article",
+                                "content": "This is a sample article.",
+                                "author": "Author Name"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/edit/{article_id}": {
+            "get": {
+                "summary": "Get edit article form",
+                "description": "Returns a form for editing the article with the given ID",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The edit article form"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Edit an article by ID",
+                "description": "Edits the article with the given ID",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to the index page",
+                        "examples": {
+                            "application/json": {
+                                "message": "Article updated successfully.",
+                                "location": "/"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete/{article_id}": {
+            "post": {
+                "summary": "Delete an article by ID",
+                "description": "Deletes the article with the given ID",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to the index page",
+                        "examples": {
+                            "application/json": {
+                                "message": "Article deleted successfully.",
+                                "location": "/"
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get delete article form",
+                "description": "Returns the delete article form",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to the index page",
+                        "examples": {
+                            "application/json": {
+                                "message": "Article deleted successfully.",
+                                "location": "/"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
