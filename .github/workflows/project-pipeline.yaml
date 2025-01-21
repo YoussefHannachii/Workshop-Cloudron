@@ -34,7 +34,7 @@ jobs:
         run: |
           python -m unittest discover -s tests
 
-  build & push:
+  build-and-push:
     name: Build Docker Images & Push Them To Docker Hub
     runs-on: ubuntu-latest
     needs: test # Ensures this job runs only if the 'test' job succeeds
