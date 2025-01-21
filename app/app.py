@@ -1,20 +1,12 @@
 from bson import ObjectId
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
-from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
 
-# Swagger UI configuration
-SWAGGER_URL = '/api/docs'
-API_URL = '/swagger.json'
-swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config={'app_name': "CI-CD Project API"})
-
-app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
-
 # Connexion à la base de données MongoDB
-client = MongoClient("mongodb://mongo:27017/")  # Use the service name 'mongo'
-db = client['CI-CD_Project']
+client = MongoClient("mongodb://mongo:27017/") # Use the service name 'mongo' 
+db = client['CI-CD_Project'] 
 articles_collection = db['article']
 
 @app.route('/')
@@ -57,4 +49,4 @@ def delete_article(article_id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True,host='0.0.0.0', port=5000)
