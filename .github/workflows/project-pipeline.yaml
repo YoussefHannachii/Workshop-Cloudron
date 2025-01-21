@@ -43,6 +43,7 @@ jobs:
     env:
       APP_IMAGE_NAME: myapp
       DB_IMAGE_NAME: mydb
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
     steps:
       # Step 1: Checkout the code
