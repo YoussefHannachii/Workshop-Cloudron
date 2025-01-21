@@ -1,0 +1,6 @@
+# Utiliser l'image officielle de MongoDB
+FROM mongo:6.0
+
+# Copier le script init.js et le fichier JSON dans le dossier attendu par MongoDB
+COPY init.js /docker-entrypoint-initdb.d/
+COPY CI-CD_Project.article.json /docker-entrypoint-initdb.d/

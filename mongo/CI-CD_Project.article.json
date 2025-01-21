@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Introduction to Flask",
+        "content": "Flask is a micro web framework for Python, known for its simplicity and flexibility. It is ideal for small to medium-sized web applications.",
+        "author": "John Doe",
+        "created_at": "2024-12-17T10:00:00",
+        "updated_at": "2024-12-17T10:00:00"
+    },
+    {
+        "title": "Getting Started with MongoDB",
+        "content": "MongoDB is a NoSQL database designed for scalability and flexibility. It stores data in JSON-like documents, making it easy to use for modern applications.",
+        "author": "Jane Smith",
+        "created_at": "2024-12-15T14:30:00",
+        "updated_at": "2024-12-15T14:30:00"
+    },
+    {
+        "title": "Understanding REST APIs",
+        "content": "A REST API is a way for two systems to communicate over HTTP. RESTful principles include stateless communication, a uniform interface, and resource representation.",
+        "author": "Alice Johnson",
+        "created_at": "2024-12-16T08:45:00",
+        "updated_at": "2024-12-16T08:45:00"
+    },
+    {
+        "title": "Why Choose Python for Web Development?",
+        "content": "Python offers extensive libraries, readability, and a vast community, making it a popular choice for web development. Frameworks like Flask and Django add to its appeal.",
+        "author": "Bob Lee",
+        "created_at": "2024-12-14T09:15:00",
+        "updated_at": "2024-12-14T09:15:00"
+    },
+    {
+        "title": "An Introduction to NoSQL Databases",
+        "content": "NoSQL databases like MongoDB offer flexibility and scalability by moving away from the traditional table-based relational databases. They are particularly useful for large datasets.",
+        "author": "Chris Brown",
+        "created_at": "2024-12-13T16:20:00",
+        "updated_at": "2024-12-13T16:20:00"
+    }
+]
