@@ -23,9 +23,9 @@ You can also find them here in the registry
 ## CI/CD  
 On the .github/workflows now we can see a pipeline that we created with two jobs one for the tests , one for the build and push docker images --> this will be updated later on. 
 Now as required and for testing purposes we used the **act** command to simulate this locally before triggering the workflow , you can see it in action bellow: 
-![Act in action 1](screens/act 1.PNG)
-![Act in action 2](screens/act 2.PNG)
-![Act in action 3](screens/act 3.PNG)
-![Act in action 4](screens/act 4.PNG)
+![Act in action 1](https://github.com/YoussefHannachii/Workshop-Cloudron/blob/main/screens/act%201.PNG)
+![Act in action 2](https://github.com/YoussefHannachii/Workshop-Cloudron/blob/main/screens/act%202.PNG)
+![Act in action 3](https://github.com/YoussefHannachii/Workshop-Cloudron/blob/main/screens/act%203.PNG)
+![Act in action 4](https://github.com/YoussefHannachii/Workshop-Cloudron/blob/main/screens/act%204.PNG)
 
 
