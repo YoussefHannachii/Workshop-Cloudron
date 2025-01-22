@@ -1,5 +1,5 @@
 # CI-CD
-
+[![CI/CD Pipeline for project](https://github.com/YoussefHannachii/Workshop-Cloudron/actions/workflows/project-pipeline.yaml/badge.svg)](https://github.com/YoussefHannachii/Workshop-Cloudron/actions/workflows/project-pipeline.yaml)
 
 
 ## Getting started
