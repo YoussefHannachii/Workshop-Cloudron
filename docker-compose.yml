@@ -3,12 +3,13 @@ version: '3.8'
 networks: 
   project: 
     external: true
+
 services:
   web:
     build: 
       context: ./app
     ports:
-      - "5000:5000"
+      - "443:443"
     environment:
       - FLASK_ENV=development
       - MONGO_URI=mongodb://mongo:27017/CI-CD_Project/article

@@ -44,6 +44,8 @@ jobs:
       APP_IMAGE_NAME: myapp
       DB_IMAGE_NAME: mydb
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      CERT_PEM: ${{ secrets.HTTPS_CERT }} # Access the cert.pem secret
+      KEY_PEM: ${{ secrets.HTTPS_KEY }}
 
     steps:
       # Step 1: Checkout the code
@@ -60,7 +62,7 @@ jobs:
        # Step 3: Build Flask App Docker Image
       - name: Build Flask App Image
         run: |
-          docker build -t $DOCKER_USERNAME/$APP_IMAGE_NAME:latest app/
+          docker build --build-arg CERT_PEM="$CERT_PEM" --build-arg KEY_PEM="$KEY_PEM" -t $DOCKER_USERNAME/$APP_IMAGE_NAME:latest app/
 
       # Step 4: Build MongoDB Docker Image
       - name: Build MongoDB Image
