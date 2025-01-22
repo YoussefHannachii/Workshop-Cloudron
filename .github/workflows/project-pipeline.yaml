@@ -46,7 +46,7 @@ jobs:
       DB_IMAGE_NAME: mydb
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       CERT_PEM: ${{ secrets.HTTPS_CERT }}
-      KEY_PEM: ${{ secrets.HTTPS_KEY }}
+      KEY_PEM: ${{ secrets.HTTTPS_KEY }}
 
     steps:
       # Step 1: Checkout the code
